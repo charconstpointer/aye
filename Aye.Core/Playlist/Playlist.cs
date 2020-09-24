@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
+using Aye.Core.Tracks;
 
-namespace Aye.Core
+namespace Aye.Core.Playlist
 {
     public class Playlist<T> where T : class, ITrack
     {

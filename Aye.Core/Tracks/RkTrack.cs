@@ -1,6 +1,6 @@
 using System;
 
-namespace Aye.Core
+namespace Aye.Core.Tracks
 {
     public class RkTrack : ITrack
     {

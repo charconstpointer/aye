@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Aye.Core
+namespace Aye.Core.Clients.Responses
 {
     public class MojepolskieResponse
     {
