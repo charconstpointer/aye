@@ -1,6 +1,6 @@
 using System;
 
-namespace Aye.Core
+namespace Aye.Core.Clients.Responses
 {
     public class MojepolskieTrackResponse
     {

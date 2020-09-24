@@ -2,35 +2,37 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Threading;
+using Aye.Core.Tracks;
 
-namespace Aye.Core
+namespace Aye.Core.Playlist
 {
     public class Playlist<T> where T : class, ITrack
     {
         private readonly LinkedList<T> _tracks = new LinkedList<T>();
+        private readonly Thread _watcher;
         public IEnumerable<T> Tracks => _tracks.ToImmutableList();
         public T Current => _tracks.First?.Value;
-        public T Next => _tracks.First?.Next?.Value;
-        public bool IsEmpty => !_tracks.Any();
 
-        private async Task Skip()
+        public Playlist()
         {
-            while (Next != null)
+            _watcher = new Thread(Skip) {IsBackground = true};
+            _watcher.Start();
+        }
+
+        private void Skip()
+        {
+            while (true)
             {
                 if (DateTime.Now > Current?.Stop)
                 {
                     _tracks.RemoveFirst();
-                    Console.WriteLine($"Current track has changed {Current}");
+                    Console.WriteLine($"Current track has change {Current}");
                 }
-
-                await Task.Delay(TimeSpan.FromSeconds(1));
+                
+                Thread.Sleep(TimeSpan.FromSeconds(1));
             }
-        }
-
-        public async Task StartTracking()
-        {
-            await Task.Run(Skip);
+            // ReSharper disable once FunctionNeverReturns
         }
 
         public void AddTrack(T track)
