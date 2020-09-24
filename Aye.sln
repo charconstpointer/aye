@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aye.Core", "Aye.Core\Aye.Core.csproj", "{4F88F129-5A50-481A-AEFE-8F7CCAE77464}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aye.Runner", "Aye.Runner\Aye.Runner.csproj", "{79F1567A-1CB2-4100-90E8-A31089E4B18C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aye.Tests", "Aye.Tests\Aye.Tests.csproj", "{5954C4A0-EE1C-4A8E-9854-2C637E8EA88B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4F88F129-5A50-481A-AEFE-8F7CCAE77464}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F88F129-5A50-481A-AEFE-8F7CCAE77464}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F88F129-5A50-481A-AEFE-8F7CCAE77464}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F88F129-5A50-481A-AEFE-8F7CCAE77464}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79F1567A-1CB2-4100-90E8-A31089E4B18C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79F1567A-1CB2-4100-90E8-A31089E4B18C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79F1567A-1CB2-4100-90E8-A31089E4B18C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79F1567A-1CB2-4100-90E8-A31089E4B18C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5954C4A0-EE1C-4A8E-9854-2C637E8EA88B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5954C4A0-EE1C-4A8E-9854-2C637E8EA88B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5954C4A0-EE1C-4A8E-9854-2C637E8EA88B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5954C4A0-EE1C-4A8E-9854-2C637E8EA88B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
