@@ -1,9 +1,9 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Aye.Core;
+﻿using Aye.Core;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Aye.Runner
 {
@@ -18,8 +18,7 @@ namespace Aye.Runner
             {
                 playlist.AddTrack(track);
             }
-
-            Console.ReadKey();
+            await playlist.StartTracking();
         }
     }
 }
