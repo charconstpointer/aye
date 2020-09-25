@@ -3,40 +3,89 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
+using Aye.Core.Repositories;
 using Aye.Core.Tracks;
 
 namespace Aye.Core.Playlist
 {
     public class Playlist<T> where T : class, ITrack
     {
+        private readonly ITracksRepository<T> _tracksRepository;
         private readonly LinkedList<T> _tracks = new LinkedList<T>();
-        private readonly Thread _watcher;
+        public bool IsStable => _checks == RequiredChecks;
+        private const uint RequiredChecks = 3;
+        private uint _checks;
+        private int _lastCheckSum;
         public IEnumerable<T> Tracks => _tracks.ToImmutableList();
+        public bool IsEmpty => !_tracks.Any();
+        private static Func<T, bool> FilterAlreadyPlayed => t => t.Start >= DateTime.Now;
         public T Current => _tracks.First?.Value;
 
-        public Playlist()
+
+        public Playlist(ITracksRepository<T> tracksRepository)
         {
-            _watcher = new Thread(Skip) {IsBackground = true};
-            _watcher.Start();
+            _tracksRepository = tracksRepository;
         }
 
-        private void Skip()
+        private async Task FetchTracks()
+        {
+            if (_checks == RequiredChecks)
+            {
+                return;
+            }
+
+            var tracks = await _tracksRepository.GetTracksAsync().ToListAsync();
+            var notYetPlayed = tracks.Where(FilterAlreadyPlayed);
+            foreach (var track in notYetPlayed)
+            {
+                AddTrack(track);
+            }
+
+            var currentCheckSum = _tracks.GetHashCode();
+            if (currentCheckSum == _lastCheckSum)
+            {
+                _checks++;
+                Console.WriteLine(_checks);
+                return;
+            }
+
+            _lastCheckSum = currentCheckSum;
+        }
+
+        public async Task Start()
+        {
+            await Task.Run(async () => { await Skip(); });
+        }
+
+        private async Task Skip()
         {
             while (true)
             {
+                if (!IsStable)
+                {
+                    _ = Task.Run(async () => await FetchTracks());
+                }
+
                 if (DateTime.Now > Current?.Stop)
                 {
                     _tracks.RemoveFirst();
                     Console.WriteLine($"Current track has change {Current}");
                 }
-                
+
                 Thread.Sleep(TimeSpan.FromSeconds(1));
             }
+
             // ReSharper disable once FunctionNeverReturns
         }
 
         public void AddTrack(T track)
         {
+            if (_tracks.Contains(track))
+            {
+                return;
+            }
+
             if (track.Stop < DateTime.Now)
             {
                 Console.WriteLine($"Skipping {track}");

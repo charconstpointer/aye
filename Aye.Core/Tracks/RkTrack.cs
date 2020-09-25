@@ -29,5 +29,22 @@ namespace Aye.Core.Tracks
         {
             return $"{Title}";
         }
+
+        private bool Equals(RkTrack other)
+        {
+            return Title == other.Title && Artist == other.Artist && Start.Equals(other.Start) && Stop.Equals(other.Stop);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            return obj.GetType() == this.GetType() && Equals((RkTrack) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Title, Artist, Start, Stop);
+        }
     }
 }
