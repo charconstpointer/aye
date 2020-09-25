@@ -33,6 +33,7 @@ namespace Aye.Core.Playlist
             while (!IsStable)
             {
                 await FetchTracks();
+                await Task.Delay(TimeSpan.FromMinutes(3));
             }
         }
         private async Task FetchTracks()
