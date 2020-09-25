@@ -25,7 +25,7 @@ namespace Aye.Tests
         [Fact]
         public void Playlists_AddTrack_KeepsCorrectOrder()
         {
-            var playlist = new Playlist<Track>();
+            var playlist = new Playlist<Track>(null);
             var timestamp = DateTime.Now;
             var track0 = new Track(timestamp.AddSeconds(44),timestamp.AddSeconds(92));
             var track1 = new Track(timestamp.AddSeconds(1), timestamp.AddSeconds(2));
@@ -44,7 +44,7 @@ namespace Aye.Tests
         [Fact]
         public void Playlists_Current_ReturnsInCorrectOrder()
         {
-            var playlist = new Playlist<Track>();
+            var playlist = new Playlist<Track>(null);
             var timestamp = DateTime.Now;
             var track0 = new Track(timestamp.AddSeconds(44),timestamp.AddSeconds(92));
             var track1 = new Track(timestamp.AddSeconds(1), timestamp.AddSeconds(2));
