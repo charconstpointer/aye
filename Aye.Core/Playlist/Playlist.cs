@@ -28,13 +28,15 @@ namespace Aye.Core.Playlist
             _tracksRepository = tracksRepository;
         }
 
+        private async Task Stabilise()
+        {
+            while (!IsStable)
+            {
+                await FetchTracks();
+            }
+        }
         private async Task FetchTracks()
         {
-            if (_checks == RequiredChecks)
-            {
-                return;
-            }
-
             var tracks = await _tracksRepository.GetTracksAsync().ToListAsync();
             var notYetPlayed = tracks.Where(FilterAlreadyPlayed);
             foreach (var track in notYetPlayed)
@@ -60,13 +62,9 @@ namespace Aye.Core.Playlist
 
         private async Task Skip()
         {
+            _ = Task.Run(async () => await Stabilise());
             while (true)
             {
-                if (!IsStable)
-                {
-                    _ = Task.Run(async () => await FetchTracks());
-                }
-
                 if (DateTime.Now > Current?.Stop)
                 {
                     _tracks.RemoveFirst();
