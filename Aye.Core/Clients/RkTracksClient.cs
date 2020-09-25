@@ -1,9 +1,9 @@
+using Aye.Core.Clients.Responses;
+using Aye.Core.Tracks;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
-using Aye.Core.Clients.Responses;
-using Aye.Core.Tracks;
 
 namespace Aye.Core.Clients
 {
@@ -13,11 +13,10 @@ namespace Aye.Core.Clients
 
         private readonly string _apiUrl;
 
-        public RkTracksClient(HttpClient httpClient)
+        public RkTracksClient(HttpClient httpClient, string apiUrl = "https://moje.polskieradio.pl/api/?mobilestationid=121&key=d590cafd-31c0-4eef-b102-d88ee2341b1a")
         {
             _httpClient = httpClient;
-            _apiUrl =
-                "https://moje.polskieradio.pl/api/?mobilestationid=121&key=d590cafd-31c0-4eef-b102-d88ee2341b1a";
+            _apiUrl = apiUrl;
         }
 
         public async IAsyncEnumerable<RkTrack> GetTracksAsync()

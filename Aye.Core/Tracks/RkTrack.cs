@@ -39,7 +39,7 @@ namespace Aye.Core.Tracks
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == this.GetType() && Equals((RkTrack) obj);
+            return obj.GetType() == this.GetType() && Equals((RkTrack)obj);
         }
 
         public override int GetHashCode()

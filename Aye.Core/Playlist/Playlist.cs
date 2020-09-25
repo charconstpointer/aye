@@ -1,11 +1,11 @@
+using Aye.Core.Repositories;
+using Aye.Core.Tracks;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Aye.Core.Repositories;
-using Aye.Core.Tracks;
 
 namespace Aye.Core.Playlist
 {

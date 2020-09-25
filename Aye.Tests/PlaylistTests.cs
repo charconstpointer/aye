@@ -1,9 +1,8 @@
-using System;
-using System.Linq;
-using Aye.Core;
 using Aye.Core.Playlist;
 using Aye.Core.Tracks;
 using FluentAssertions;
+using System;
+using System.Linq;
 using Xunit;
 
 namespace Aye.Tests
@@ -27,7 +26,7 @@ namespace Aye.Tests
         {
             var playlist = new Playlist<Track>(null);
             var timestamp = DateTime.Now;
-            var track0 = new Track(timestamp.AddSeconds(44),timestamp.AddSeconds(92));
+            var track0 = new Track(timestamp.AddSeconds(44), timestamp.AddSeconds(92));
             var track1 = new Track(timestamp.AddSeconds(1), timestamp.AddSeconds(2));
             var track2 = new Track(timestamp.AddSeconds(4), timestamp.AddSeconds(5));
             var track3 = new Track(timestamp.AddSeconds(5), timestamp.AddSeconds(10));
@@ -46,7 +45,7 @@ namespace Aye.Tests
         {
             var playlist = new Playlist<Track>(null);
             var timestamp = DateTime.Now;
-            var track0 = new Track(timestamp.AddSeconds(44),timestamp.AddSeconds(92));
+            var track0 = new Track(timestamp.AddSeconds(44), timestamp.AddSeconds(92));
             var track1 = new Track(timestamp.AddSeconds(1), timestamp.AddSeconds(2));
             playlist.AddTrack(track0);
             playlist.AddTrack(track1);
