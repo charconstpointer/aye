@@ -72,7 +72,13 @@ namespace Aye.Core.Playlist
                     Console.WriteLine($"Current track has change {Current}");
                 }
 
-                Thread.Sleep(TimeSpan.FromSeconds(1));
+                var currentTrackEnding = Current?.Stop.Subtract(DateTime.Now);
+                if (currentTrackEnding.HasValue)
+                {
+                    Thread.Sleep(currentTrackEnding.Value);
+                    continue;
+                }
+                Thread.Sleep(TimeSpan.FromSeconds(5));
             }
 
             // ReSharper disable once FunctionNeverReturns
