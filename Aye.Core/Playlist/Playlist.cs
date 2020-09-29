@@ -75,10 +75,10 @@ namespace Aye.Core.Playlist
                 var currentTrackEnding = Current?.Stop.Subtract(DateTime.Now);
                 if (currentTrackEnding.HasValue)
                 {
-                    Thread.Sleep(currentTrackEnding.Value);
+                    await Task.Delay(currentTrackEnding.Value);
                     continue;
                 }
-                Thread.Sleep(TimeSpan.FromSeconds(5));
+                await Task.Delay(TimeSpan.FromSeconds(5));
             }
 
             // ReSharper disable once FunctionNeverReturns
