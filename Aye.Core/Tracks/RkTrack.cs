@@ -4,9 +4,8 @@ namespace Aye.Core.Tracks
 {
     public class RkTrack : ITrack
     {
-        public RkTrack(int id, string title, string artist, DateTime start, DateTime stop)
+        public RkTrack(int id, string title, string artist, DateTime start, DateTime stop, string image = "https://i.imgur.com/aj6sB86.png")
         {
-            var image = "https://i.imgur.com/aj6sB86.png";
             Id = id;
             Title = title;
             Artist = artist;
