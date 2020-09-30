@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Aye.Core.Playlist
@@ -72,7 +71,13 @@ namespace Aye.Core.Playlist
                     Console.WriteLine($"Current track has change {Current}");
                 }
 
-                Thread.Sleep(TimeSpan.FromSeconds(1));
+                var currentTrackEnding = Current?.Stop.Subtract(DateTime.Now);
+                if (currentTrackEnding.HasValue)
+                {
+                    await Task.Delay(currentTrackEnding.Value);
+                    continue;
+                }
+                await Task.Delay(TimeSpan.FromSeconds(5));
             }
 
             // ReSharper disable once FunctionNeverReturns
